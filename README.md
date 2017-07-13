@@ -1,1 +1,7 @@
-# front_starter_pack
+# Starter pack
+_Front end starter pack_
+
+To init the project :
+
+- npm install
+- gulp
