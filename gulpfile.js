@@ -8,7 +8,7 @@ var gulp = require('gulp'),
     del = require('del'),
     sourcemap = require('gulp-sourcemaps'),
     cleanCSS = require('gulp-clean-css');
-    browserSync = require('browser-sync').create();
+browserSync = require('browser-sync').create();
 
 gulp.task('serve', ['styles', 'scripts'], function() {
 
@@ -20,15 +20,14 @@ gulp.task('serve', ['styles', 'scripts'], function() {
         port: 3000
     });
 
-    gulp.watch('src/sass/*.scss', ['styles']).on('change', browserSync.reload);
+    gulp.watch('src/sass/**/*.scss', ['styles']).on('change', browserSync.reload);
     gulp.watch('src/js/*.js', ['scripts']);
-  	gulp.watch('*.html').on('change', browserSync.reload);
-  	gulp.watch('src/scss/*.scss').on('change', browserSync.reload);
+    gulp.watch('*.html').on('change', browserSync.reload);
     gulp.watch('src/js/*.js').on('change', browserSync.reload);
 });
 
 gulp.task('styles', function() {
-      return gulp.src('src/sass/*.scss')
+    return gulp.src('src/sass/*.scss')
         .pipe(sourcemap.init())
         .pipe(sass({ style: 'expanded' }).on('error', sass.logError))
         .pipe(autoprefixer('last 2 version', 'ie 8', 'ie 9'))
@@ -40,19 +39,19 @@ gulp.task('styles', function() {
 });
 
 gulp.task('scripts', function() {
-  return gulp.src([
+    return gulp.src([
         'src/js/*.js'
     ])
-    .pipe(concat('script.js'))
-    .pipe(uglify())
-    .pipe(gulp.dest('dest/js/'))
+        .pipe(concat('script.js'))
+        .pipe(uglify())
+        .pipe(gulp.dest('dest/js/'))
 });
 
 gulp.task('imgoptim', ['imgdel'], function () {
     return gulp.src('src/img/*.{jpg,png,svg}')
         .pipe(gulp.dest('dest/img/'))
         .pipe(imagemin());
-        
+
 });
 
 gulp.task('imgdel', function () {
